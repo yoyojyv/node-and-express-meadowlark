@@ -21,6 +21,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// set 'showTests' context property if the querystring contains test=1
+app.use(function(req, res, next){
+  res.locals.layout = 'layouts/main';
+  res.locals.showTests = app.get('env') !== 'production' && req.query.test === '1';
+  console.log(app.get('env') !== 'production' && req.query.test === '1');
+  next();
+});
+
 app.use('/', routes);
 // app.use('/users', users);
 
@@ -31,51 +39,54 @@ app.use(function (req, res, next) {
   next(err);
 });
 
-// custom 404 page
-app.use(function(req, res) {
-  // res.type('text/plain');
-  // res.status(404);
-  // res.send('404 - Not Found');
-  res.status(404);
-  res.render('404');
-});
-
-// custom 500 page
-app.use(function (err, req, res, next) {
-  console.error(err.stack);
-  // res.type('text/plain');
-  // res.status(500);
-  // res.send('500 - Server Error');
-  res.status(500);
-  res.render('500');
-});
+// // custom 404 page
+// app.use(function(req, res) {
+//   // res.type('text/plain');
+//   // res.status(404);
+//   // res.send('404 - Not Found');
+//   res.status(404);
+//   res.render('404');
+// });
+//
+// // custom 500 page
+// app.use(function (err, req, res, next) {
+//   console.error(err.stack);
+//   // res.type('text/plain');
+//   // res.status(500);
+//   // res.send('500 - Server Error');
+//   res.status(500);
+//   res.render('500');
+// });
 
 // error handlers
 
-// // development error handler
-// // will print stacktrace
-// if (app.get('env') === 'development') {
-//   app.use(function (err, req, res, next) {
-//     res.status(err.status || 500);
-//     res.render('error', {
-//       message: err.message,
-//       error: err,
-//     });
-//   });
-// }
-//
-// // production error handler
-// // no stacktraces leaked to user
-// app.use(function (err, req, res, next) {
-//   res.status(err.status || 500);
-//   res.render('error', {
-//     message: err.message,
-//     error: {},
-//   });
-// });
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+  app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err,
+    });
+  });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function (err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {},
+  });
+});
 
 app.listen(app.get('port'), function () {
   console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminaate.');
 });
 
 module.exports = app;
+
+// test jshint - error like this -> app.js: line 92, col 15, Use '===' to compare with 'null'.
+// if (app.thing == null) console.log('bleat!');
