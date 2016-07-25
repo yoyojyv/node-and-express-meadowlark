@@ -75,3 +75,23 @@ Run Grunt
 ```
 grunt
 ```
+
+## ch06 ##
+
+Disable Express X-Powered-by Header
+```
+app.disable('x-powered-by');
+```
+
+PASS~~
+
+## ch07 ##
+
+Not use 'express-handlebars' module instead **'hbs'** module  
+
+section changed -> **extend, block**   
+
+See [hbs helpers and partials](https://github.com/donpark/hbs#helpers-and-partials)
+See [hbs extra scripts or styles](https://github.com/donpark/hbs#extra-scripts-or-styles)
+
+

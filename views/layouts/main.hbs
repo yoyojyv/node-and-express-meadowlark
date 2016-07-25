@@ -6,6 +6,7 @@
     {{#if showTests}}
       <link rel="stylesheet" href="/vendor/mocha.css">
     {{/if}}
+    {{{block "head"}}}
   </head>
   <body>
     {{{body}}}
@@ -26,5 +27,6 @@
     {{/if}}
 
     <script src="//code.jquery.com/jquery-2.0.2.min.js"></script>
+    {{{block "jquery"}}}
   </body>
 </html>

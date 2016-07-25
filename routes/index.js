@@ -26,4 +26,21 @@ router.get('/tours/request-group-rate', function (req, res) {
   res.render('tours/request-group-rate');
 });
 
+router.get('/jquery-test', function (req, res) {
+  res.render('jquery-test');
+});
+
+router.get('/nursery-rhyme', function (req, res) {
+  res.render('nursery-rhyme');
+});
+
+router.get('/data/nursery-rhyme', function (req, res) {
+  res.json({
+    animal: 'squirrel',
+    bodyPart: 'tail',
+    adjective: 'bushy',
+    noun: 'heck',
+  });
+});
+
 module.exports = router;
