@@ -8,7 +8,9 @@ var hbs = require('hbs');
 
 var routes = require('./routes/index');
 
-var jqupload = require('jquery-file-upload-middleware');
+// var jqupload = require('jquery-file-upload-middleware');
+
+var credentials = require('./credentials.js');
 
 var app = express();
 
@@ -51,10 +53,25 @@ hbs.registerPartials(__dirname + '/views/partials');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
+app.use(cookieParser(credentials.cookieSecret));
+app.use(require('express-session')({
+  resave: false,
+  saveUninitialized: false,
+  secret: credentials.cookieSecret
+}));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
+// flash message middleware
+app.use(function(req, res, next){
+  // if there's a flash message, transfer
+  // it to the context, then clear it
+  res.locals.flash = req.session.flash;
+  delete req.session.flash;
+  next();
+});
+
 
 // set 'showTests' context property if the querystring contains test=1
 app.use(function(req, res, next){
@@ -100,18 +117,18 @@ app.use(function(req, res, next){
   next();
 });
 
-// jQuery File Upload endpoint middleware
-app.use('/upload', function(req, res, next){
-  var now = Date.now();
-  jqupload.fileHandler({
-    uploadDir: function(){
-      return __dirname + '/public/uploads/' + now;
-    },
-    uploadUrl: function(){
-      return '/uploads/' + now;
-    },
-  })(req, res, next);
-});
+// // jQuery File Upload endpoint middleware
+// app.use('/upload', function(req, res, next){
+//   var now = Date.now();
+//   jqupload.fileHandler({
+//     uploadDir: function(){
+//       return __dirname + '/public/uploads/' + now;
+//     },
+//     uploadUrl: function(){
+//       return '/uploads/' + now;
+//     },
+//   })(req, res, next);
+// });
 
 app.use('/', routes);
 // app.use('/users', users);

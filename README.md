@@ -106,6 +106,7 @@ npm install --save body-parser
 Install Formidable (Multipart upload)
 
 ```
+
 npm install --save formidable
 ```
 
@@ -115,3 +116,31 @@ Use jQuery File Upload
 npm install --save jquery-file-upload-middleware
 ```
 
+
+
+## ch09 ##
+
+Create credentials.js file and edit 
+
+```
+module.exports = {
+  cookieSecret: 'your cookie secret goes here',
+};
+```
+
+Add credentials.js to your .gitignore file
+
+Install cookie-parser middleware (already installed)
+```
+npm install --save cookie-parser
+```
+
+Set cookie-parser
+```
+app.use(cookieParser(credentials.cookieSecret));
+```
+
+Install express-session
+```
+npm install --save express-session
+```

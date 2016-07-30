@@ -133,3 +133,6 @@ Temporary Items
 # JIRA plugin
 
 # Crashlytics plugin (for Android Studio and IntelliJ)
+
+# custom
+/credentials.js
