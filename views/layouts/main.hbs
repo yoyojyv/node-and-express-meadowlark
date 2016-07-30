@@ -1,32 +1,87 @@
 <!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Meadowlark Travel</title>
     {{#if showTests}}
-      <link rel="stylesheet" href="/vendor/mocha.css">
+        <link rel="stylesheet" href="/vendor/mocha.css">
     {{/if}}
     {{{block "head"}}}
-  </head>
-  <body>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--<link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <style>
+        body {
+            padding-top: 50px;
+            padding-bottom: 20px;
+        }
+    </style>
+    <!--<link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap-theme.min.css">-->
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/main.css">
+
+    <!--<script src="/vendor/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>-->
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+
+</head>
+<body>
+
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<header><img src="/img/logo.png" alt="Meadowlark Travel Logo"></header>
+
+<div class="container">
+
     {{{body}}}
+    <hr>
 
-    {{#if showTests}}
-        <div id="mocha"></div>
-        <script src="/vendor/mocha.js"></script>
-        <script src="/vendor/chai.js"></script>
-        <script>
-            mocha.ui('tdd');
-            var assert = chai.assert;
-        </script>
-        <script src="/qa/tests-global.js"></script>
-        {{#if pageTestScript}}
-            <script src="{{pageTestScript}}"></script>
-        {{/if}}
-        <script>mocha.run();</script>
+    <footer>
+        <p>&copy; Meadowlark Travel 2014</p>
+    </footer>
+</div> <!-- /container -->
+
+<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script>window.jQuery || document.write('<script src="/vendor/js/jquery-2.1.1.min.js"><\/script>')</script>
+{{{block "jquery"}}}
+
+{{#if showTests}}
+    <div id="mocha"></div>
+    <script src="/vendor/mocha.js"></script>
+    <script src="/vendor/chai.js"></script>
+    <script>
+        mocha.ui('tdd');
+        var assert = chai.assert;
+    </script>
+    <script src="/qa/tests-global.js"></script>
+    {{#if pageTestScript}}
+        <script src="{{pageTestScript}}"></script>
     {{/if}}
+    <script>mocha.run();</script>
+{{/if}}
 
-    <script src="//code.jquery.com/jquery-2.0.2.min.js"></script>
-    {{{block "jquery"}}}
-  </body>
+
+<!--<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>-->
+<!-- Latest compiled and minified JavaScript -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
+<script src="/js/main.js"></script>
+</body>
 </html>

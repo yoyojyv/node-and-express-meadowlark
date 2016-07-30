@@ -95,3 +95,23 @@ See [hbs helpers and partials](https://github.com/donpark/hbs#helpers-and-partia
 See [hbs extra scripts or styles](https://github.com/donpark/hbs#extra-scripts-or-styles)
 
 
+## ch08 ##
+
+Install body-parser (already installed)
+
+```
+npm install --save body-parser
+```
+
+Install Formidable (Multipart upload)
+
+```
+npm install --save formidable
+```
+
+Use jQuery File Upload
+
+```
+npm install --save jquery-file-upload-middleware
+```
+
