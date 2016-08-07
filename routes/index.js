@@ -95,7 +95,7 @@ router.post('/newsletter', function (req, res) {
   });
 });
 
-router.get('/newsletter/archive', function(req, res){
+router.get('/newsletter/archive', function (req, res) {
   res.render('newsletter/archive');
 });
 
@@ -154,6 +154,27 @@ router.post('/contest/vacation-photo-jqfu/:year/:month', function (req, res) {
     console.log('received files:');
     console.log(files);
     res.redirect(303, '/thank-you');
+  });
+});
+
+var Product = require('../lib/product');
+
+router.get('/tours/:tour', function (req, res, next) {
+  Product.findOne({ category: 'tour', slug: req.params.tour }, function (err, tour) {
+    if (err) return next(err);
+    if (!tour) return next();
+    res.render('tour', { tour: tour });
+  });
+});
+
+router.get('/adventures/:subcat/:name', function (req, res, next) {
+  Product.findOne({
+    category: 'adventure',
+    slug: req.params.subcat + '/' + req.params.name,
+  }, function (err, adventure) {
+    if (err) return next(err);
+    if (!adventure) return next();
+    res.render('adventure', { adventure: adventure });
   });
 });
 

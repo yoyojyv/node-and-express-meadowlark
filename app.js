@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var hbs = require('hbs');
 
 var routes = require('./routes/index');
+var cartRoutes = require('./routes/cart');
 
 // var jqupload = require('jquery-file-upload-middleware');
 
@@ -81,6 +82,8 @@ app.use(function(req, res, next){
   next();
 });
 
+require('./route-example');
+
 // mocked weather data
 function getWeatherData(){
   return {
@@ -131,7 +134,15 @@ app.use(function(req, res, next){
 // });
 
 app.use('/', routes);
-// app.use('/users', users);
+
+
+var cartValidation = require('./lib/cartValidation.js');
+
+app.use(cartValidation.checkWaivers);
+app.use(cartValidation.checkGuestCounts);
+
+
+app.use('/cart', cartRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
